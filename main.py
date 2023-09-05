@@ -18,12 +18,6 @@ if __name__ == "__main__":
             newPackage.setWeight(box[6])
             packageList.append(newPackage)
             
-            # print(' '.join(package))
         for package in packageList:
             print(package)
             
-            
-            
-            
-    
-    
