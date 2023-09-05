@@ -40,5 +40,8 @@ class Package:
         self.deliveryTime = time
     def getStatus(self):
         print(f'Package:{self.packageID} | Address: {self.address}')
-    def __repr__(self):
+    def returnStringRepresentation(self):
         return f"{'Package ID: ' + self.packageID:<15} | {'Address: '+ self.address:<48} | {'City: ' + self.city:<25} | {'State: ' + self.state:<10} | {'Zip: ' + self.zip:<10} | {'Delivery Deadline: ' + self.deliveryDeadLine:<28} | {'Weight: ' + str(self.weight):<10} | {'Delivery Status: ' + str(self.deliveryStatus):<25} | {'Delivery Time: ' + self.deliveryTime:<12}"
+    
+    # def __repr__(self):
+    #     return f"{'Package ID: ' + self.packageID:<15} | {'Address: '+ self.address:<48} | {'City: ' + self.city:<25} | {'State: ' + self.state:<10} | {'Zip: ' + self.zip:<10} | {'Delivery Deadline: ' + self.deliveryDeadLine:<28} | {'Weight: ' + str(self.weight):<10} | {'Delivery Status: ' + str(self.deliveryStatus):<25} | {'Delivery Time: ' + self.deliveryTime:<12}"
