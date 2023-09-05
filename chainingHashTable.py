@@ -1,5 +1,5 @@
 class chainingHashTable:
-    def __init__(self, initial_capacity = 10):
+    def __init__(self, initial_capacity = 1000):
         
         self.table = []
         for i in range(initial_capacity):
