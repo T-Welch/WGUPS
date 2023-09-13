@@ -25,7 +25,7 @@ if __name__ == "__main__":
                 # packageList.append(newPackage)
                 #try:
                 #print(type(newPackage.packageID))
-                print(hashTable.search(newPackage.packageID))
+                #print(hashTable.search(newPackage.packageID))
                 #except AttributeError:
                 #    print('non issue')
         
@@ -34,6 +34,11 @@ if __name__ == "__main__":
     loadPackageDataAndInsertIntoHashTable()
     
        
-    dist = distance.Distance
-    dist.loadDistanceTable(dist)
+    dist = distance.Distance()
+    dist.loadDistanceTable()
+    # print(dist.returnAddressIndex('2835 Main St'))
+    # print(dist.returnAddressIndex('HUB'))
+    #print(dist.distance_table[11][1])
+    #print(dist.returnDistance(11,0))
+    print(dist.returnDistance(dist.returnAddressIndex('HUB'), dist.returnAddressIndex('3365 S 900 W')))
             
