@@ -1,4 +1,4 @@
-
+import distance
 from datetime import datetime, timedelta
 class truck:
     def __init__(self,):
@@ -6,7 +6,7 @@ class truck:
         self.truckDepartureTime = datetime.today().replace(hour=10, minute=0, second=0, microsecond= 0)
         self.time = self.truckDepartureTime
         self.packages = []
-        self.currentLocatoin = 'HUB'
+        self.currentLocation = 0
         
         
     def isFull(self):
@@ -29,6 +29,8 @@ class truck:
         self.packages.remove(packageID)
     def addTime(self, minutes):
         self.time = self.time + timedelta(minutes=minutes)
+    def setCurrentLocation(self,address):
+        self.currentLocation = distance.returnAddressIndex(address)
         
     def __repr__(self) -> str:
         return f'Packages in this truck: {self.packages}'

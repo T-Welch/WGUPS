@@ -1,7 +1,7 @@
 import random
 class Menu:
     
-    def MOTD():
+    def MOTD() -> str:
         motds = [
         "I hope you have a good day and good things happen to you.",
         "Remember, every moment is an opportunity to shine.",
@@ -23,7 +23,7 @@ class Menu:
     
     #this is unnccessary, just for looks
     
-    def welcomeMessage():
+    def welcomeMessage() -> None:
         print('**********************************************************************************\n')
         print('                    Welcome to Trevor\'s WGUPS implementation!')
         print('          Please refer to this menu in order to interact with this program.')
@@ -32,7 +32,7 @@ class Menu:
         
     #created a function for this for extensibility later for portfolio project
     
-    def optionMenu():
+    def optionMenu() -> None:
         print('Enter (Q) to quit.')
         print('Enter M to display this menu')
         print('Enter (S) + [time] to view the status of packages at a given time.')

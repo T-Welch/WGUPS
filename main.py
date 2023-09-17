@@ -9,7 +9,7 @@ from truck import truck
 
 hashTable = chainingHashTable.chainingHashTable()
 
-def loadPackageDataAndInsertIntoHashTable():
+def loadPackageDataAndInsertIntoHashTable() -> None:
         with open('packages.csv', newline='') as csvfile:
             # PD will be shorthand for package data for ease of use
             PD = csv.reader(csvfile, delimiter= ',')
@@ -28,7 +28,7 @@ def loadPackageDataAndInsertIntoHashTable():
                 newPackage.setWeight(box[6])
                 hashTable.insert(newPackage.packageID, newPackage)       
                       
-def loadTrucks():
+def loadTrucks() -> None:
     truck1Packages = [30,8,27,35,40,4,37,5,29,7,39,31,1]
     truck2Packages = [6,3,14,15,34,13,16,18,19,20,21,36,38,22,12,23]
     truck3Packages = [9,25,26,28,32,10,2,33,11,17,24]
@@ -38,7 +38,7 @@ def loadTrucks():
         truck2.loadPackage(package)
     for package in truck3Packages:
         truck3.loadPackage(package)
-def userInterface():
+def userInterface() -> None:
     interface = menu.Menu
     interface.welcomeMessage()
     while True:
@@ -61,15 +61,31 @@ def userInterface():
                 print('\n**********************************************\n')
                 continue
 
-packageManagmentTable = {}
-def packageManager():
-    return
+'''
+here we are creating a dictionary where the key is the time and the value is a copy of 
+the hash table at that given time. This way we can print the status of packages at that 
+time by just printing the value of the dictionary
+
+so when someone asks for the status at something like 9:30 we can just do something like print(packageManager[time]) something 
+we will have to look out for though is if the time requested is not in the hash table in which case we might just want to decrement by 1
+something like 
+
+while time not in hash table:
+    time = time - 1
+    
+this is because we want to get the previous status because we can not look into the future 
+'''
+
+packageManager = {}
+
+def packageManager(time, hashTable):
+    packageManager[time] = hashTable
     
 
-def calculateTimeGivenDistance(distance):
+def calculateTimeGivenDistance(distance) -> float:
     
     fractional_time = distance/18
-    return(fractional_time , 60 * fractional_time)
+    return(60 * fractional_time)
     
 
 
