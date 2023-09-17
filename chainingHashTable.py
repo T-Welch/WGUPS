@@ -46,5 +46,29 @@ class chainingHashTable:
             if keyValue[0] == key:
                 bucket_list.remove([keyValue[0],keyValue[1]])
                 
-    # def __repr__(self):
+    def print_all(self):
+        # Create a list to store (original key, value) pairs
+        sorted_entries = []
+        
+        for bucket in self.table:
+            for keyValue in bucket:
+                # Since all keys are hashes of integers, we will append a tuple containing
+                # the original integer (which is the value of the key) and its corresponding value
+                sorted_entries.append((keyValue[0], keyValue[1]))
+
+        # Sort the list based on the original integer values
+        sorted_entries.sort()
+
+        # Print the sorted entries
+        for entry in sorted_entries:
+            print(f'{entry[1]}')
+
+
+    def __repr__(self):
+        entries = []
+        for bucket in self.table:
+            for keyValue in bucket:
+                entries.append(f"{keyValue[0]}: {keyValue[1]}")
+        return "{" + ", ".join(entries) + "}"
+
         

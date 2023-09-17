@@ -2,10 +2,11 @@
 from datetime import datetime, timedelta
 class truck:
     def __init__(self,):
-        truckNumber = 0
-        truckDepartureTime = datetime.today().replace(hour=10, minute=0, second=0, microsecond= 0)
-        time = truckDepartureTime
-        packages = []
+        self.truckNumber = 0
+        self.truckDepartureTime = datetime.today().replace(hour=10, minute=0, second=0, microsecond= 0)
+        self.time = self.truckDepartureTime
+        self.packages = []
+        self.currentLocatoin = 'HUB'
         
         
     def isFull(self):
@@ -21,10 +22,14 @@ class truck:
         else: False
         
         
+        
     def loadPackage(self, packageID):
         self.packages.append(packageID)
     def unloadPackage(self, packageID):
         self.packages.remove(packageID)
     def addTime(self, minutes):
         self.time = self.time + timedelta(minutes=minutes)
+        
+    def __repr__(self) -> str:
+        return f'Packages in this truck: {self.packages}'
     
