@@ -30,3 +30,7 @@ class Distance:
         bigger, smaller = (index1, index2) if index1 > index2 else (index2, index1)
         
         return self.distance_table[bigger][smaller + 1]
+    def calculateTimeGivenDistance(distance) -> float:
+    
+        fractional_time = distance/18
+        return(60 * fractional_time)

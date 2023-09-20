@@ -60,9 +60,12 @@ def userInterface() -> None:
                 print('Invalid time value. Please use HH:MM ex: 09:30')
                 print('\n**********************************************\n')
                 continue
+    
+    
+    return 
 
 '''
-here we are creating a dictionary where the key is the time and the value is a copy of 
+below we are creating a dictionary where the key is the time and the value is a copy of 
 the hash table at that given time. This way we can print the status of packages at that 
 time by just printing the value of the dictionary
 
@@ -76,17 +79,10 @@ while time not in hash table:
 this is because we want to get the previous status because we can not look into the future 
 '''
 
-packageManager = {}
+timeTable = {}
 
 def packageManager(time, hashTable):
-    packageManager[time] = hashTable
-    
-
-def calculateTimeGivenDistance(distance) -> float:
-    
-    fractional_time = distance/18
-    return(60 * fractional_time)
-    
+    timeTable[time] = hashTable
 
 
 
@@ -96,20 +92,29 @@ if __name__ == "__main__":
     truck2 = truck()
     truck3 = truck()
     
-    print(calculateTimeGivenDistance(7.2))
+
+    
+    #print(calculateTimeGivenDistance(7.2))
 
     # userInterface()
             
     loadPackageDataAndInsertIntoHashTable()
     loadTrucks()
-    print(truck1)
-    print(truck2)
-    print(truck3)
+    truck1.startDeliveryRoute()
+    # print(truck1)
+    # print(truck2)
+    # print(truck3)
        
     dist = distance.Distance()
     dist.loadDistanceTable()
     
-    hashTable.print_all()
+    #hashTable.printAll()
+    
+    packageManager(datetime.today().replace(hour=10, minute=0, second=0, microsecond= 0), hashTable)
+    
+    #timeTable[datetime.today().replace(hour=10, minute=0, second=0, microsecond= 0)].printAll()
+    
+    #print(timeTable[datetime.today().replace(hour=10, minute=0, second=0, microsecond= 0)])
     
     # print(dist.returnAddressIndex('2835 Main St'))
     # print(dist.returnAddressIndex('HUB'))

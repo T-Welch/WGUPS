@@ -6,7 +6,7 @@ class truck:
         self.truckDepartureTime = datetime.today().replace(hour=10, minute=0, second=0, microsecond= 0)
         self.time = self.truckDepartureTime
         self.packages = []
-        self.currentLocation = 0
+        self.currentLocation = "HUB"
         
         
     def isFull(self):
@@ -20,11 +20,17 @@ class truck:
         if len(self.packages) > 0:
             return True
         else: False
+    
+    def startDeliveryRoute(self):
+        nextPackage = None    
+        for package in self.packages:
+            return
+                
+                    
         
         
-        
-    def loadPackage(self, packageID):
-        self.packages.append(packageID)
+    def loadPackage(self, package):
+        self.packages.append(package)
     def unloadPackage(self, packageID):
         self.packages.remove(packageID)
     def addTime(self, minutes):

@@ -46,7 +46,7 @@ class chainingHashTable:
             if keyValue[0] == key:
                 bucket_list.remove([keyValue[0],keyValue[1]])
                 
-    def print_all(self):
+    def printAll(self):
         # Create a list to store (original key, value) pairs
         sorted_entries = []
         
