@@ -19,7 +19,7 @@ class Distance:
                 
             
     
-    def returnAddressIndex(self,address) -> int:
+    def returnAddressIndex(self, address) -> int:
         for i, line in enumerate(self.distance_table):
             if line[0] == address:
                 return i

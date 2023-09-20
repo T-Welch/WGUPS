@@ -32,12 +32,16 @@ def loadTrucks() -> None:
     truck1Packages = [30,8,27,35,40,4,37,5,29,7,39,31,1]
     truck2Packages = [6,3,14,15,34,13,16,18,19,20,21,36,38,22,12,23]
     truck3Packages = [9,25,26,28,32,10,2,33,11,17,24]
-    for package in truck1Packages:
-        truck1.loadPackage(package)
-    for package in truck2Packages:
-        truck2.loadPackage(package)
-    for package in truck3Packages:
-        truck3.loadPackage(package)
+    for packageID in truck1Packages:
+        address = hashTable.search(packageID).address
+        truck1.loadPackage(packageID, address)
+    for packageID in truck2Packages:
+        address = hashTable.search(packageID).address
+        truck2.loadPackage(packageID, address)
+    for packageID in truck3Packages:
+        address = hashTable.search(packageID).address
+        truck3.loadPackage(packageID, address)
+
 def userInterface() -> None:
     interface = menu.Menu
     interface.welcomeMessage()
@@ -101,9 +105,9 @@ if __name__ == "__main__":
     loadPackageDataAndInsertIntoHashTable()
     loadTrucks()
     truck1.startDeliveryRoute()
-    # print(truck1)
-    # print(truck2)
-    # print(truck3)
+    print(truck1)
+    print(truck2)
+    print(truck3)
        
     dist = distance.Distance()
     dist.loadDistanceTable()
