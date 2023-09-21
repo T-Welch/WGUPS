@@ -30,7 +30,18 @@ class Distance:
         bigger, smaller = (index1, index2) if index1 > index2 else (index2, index1)
         
         return self.distance_table[bigger][smaller + 1]
-    def calculateTimeGivenDistance(distance) -> float:
+    def calculateTimeGivenDistance(self,distance) -> float:
     
         fractional_time = distance/18
         return(60 * fractional_time)
+    
+    def nearestNeighbor(self, currentLocation, listOfPackages) -> tuple:
+        nextPackage = None
+        nextPackageDistance = float("inf")
+        for package in listOfPackages:
+            if  self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) ) < nextPackageDistance:
+                nextPackage = package
+                nextPackageDistance = self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) )
+                print(f'found closer package {package[0]}, at {package[1]}, {nextPackageDistance} away')
+                
+        return(nextPackage, nextPackageDistance)

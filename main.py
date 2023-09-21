@@ -106,8 +106,8 @@ if __name__ == "__main__":
     loadTrucks()
     truck1.startDeliveryRoute()
     print(truck1)
-    print(truck2)
-    print(truck3)
+    # print(truck2)
+    # print(truck3)
        
     dist = distance.Distance()
     dist.loadDistanceTable()

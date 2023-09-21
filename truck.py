@@ -26,15 +26,28 @@ class truck:
         else: False
     
     def startDeliveryRoute(self):
-        nextPackage = None    
-        nextPackageDistance = float("inf")
-        for package in self.packages:
-            print(f'package on current iteration {package}')
-            currentLocation = self.currentLocation
-            if   self.distanceObj.returnDistance(self.distanceObj.returnAddressIndex(currentLocation),self.distanceObj.returnAddressIndex(package[1]) ) < nextPackageDistance:
-                nextPackage = package
-                nextPackageDistance = self.distanceObj.returnDistance(self.distanceObj.returnAddressIndex(self.currentLocation),self.distanceObj.returnAddressIndex(package[1]) )
-                print(f'found closer package {package[0]}, at {package[1]}, {nextPackageDistance} away')
+        # nextPackage = None    
+        # nextPackageDistance = float("inf")
+        # for package in self.packages:
+        #     #print(f'package on current iteration {package}')
+        #     currentLocation = self.currentLocation
+        #     if  self.distanceObj.returnDistance(self.distanceObj.returnAddressIndex(currentLocation),self.distanceObj.returnAddressIndex(package[1]) ) < nextPackageDistance:
+        #         nextPackage = package
+        #         nextPackageDistance = self.distanceObj.returnDistance(self.distanceObj.returnAddressIndex(self.currentLocation),self.distanceObj.returnAddressIndex(package[1]) )
+        #         print(f'found closer package {package[0]}, at {package[1]}, {nextPackageDistance} away')
+            
+        while self.isNotEmpty():
+            nextPackage, nextPackageDistance = self.distanceObj.nearestNeighbor(self.currentLocation, self.packages)
+                
+                
+            self.addTime(self.distanceObj.calculateTimeGivenDistance(nextPackageDistance))
+            print(f'arrived at {nextPackage[1]}, trip took: {self.distanceObj.calculateTimeGivenDistance(nextPackageDistance)} minutes')
+            self.currentLocation = nextPackage[1]
+            print(f'updating my current location to {nextPackage[1]}')
+            self.unloadPackage(nextPackage[0])
+            print(f'unloading package ID: {nextPackage[0]}')
+            print(f'time is {self.time}')
+            
         
     def loadPackage(self, packageID, address):
         self.packages.append((packageID, address))
