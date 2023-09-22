@@ -5,27 +5,28 @@ class truck:
     
     def __init__(self,):
         self.truckNumber = 0
-        self.truckDepartureTime = datetime.today().replace(hour=10, minute=0, second=0, microsecond= 0)
+        self.truckDepartureTime = datetime.today().replace(hour=0, minute=0, second=0, microsecond= 0)
         self.time = self.truckDepartureTime
         self.packages = []
-        self.currentLocation = "HUB"
+        self.currentLocation = 'HUB'
+        self.distanceTraveled = 0
         
         self.distanceObj = distance.Distance()
         self.distanceObj.loadDistanceTable()
   
-    def isFull(self):
+    def isFull(self) -> int:
         if len(self.packages) > 16:
             raise Exception("The truck is overloaded")
         elif len(self.packages) == 16:
             return 1
         else:
             return 0
-    def isNotEmpty(self):
+    def isNotEmpty(self) -> bool:
         if len(self.packages) > 0:
             return True
         else: False
     
-    def startDeliveryRoute(self):
+    def startDeliveryRoute(self) -> tuple:
         # nextPackage = None    
         # nextPackageDistance = float("inf")
         # for package in self.packages:
@@ -41,6 +42,7 @@ class truck:
                 
                 
             self.addTime(self.distanceObj.calculateTimeGivenDistance(nextPackageDistance))
+            self.addDistance(nextPackageDistance)
             print(f'arrived at {nextPackage[1]}, trip took: {self.distanceObj.calculateTimeGivenDistance(nextPackageDistance)} minutes')
             self.currentLocation = nextPackage[1]
             print(f'updating my current location to {nextPackage[1]}')
@@ -48,21 +50,34 @@ class truck:
             print(f'unloading package ID: {nextPackage[0]}')
             print(f'time is {self.time}')
             
+        print(f'All packages delivered, returning to HUB')
+        distanceToHUB = self.distanceObj.returnDistance(self.distanceObj.returnAddressIndex(self.currentLocation),self.distanceObj.returnAddressIndex('HUB'))
+        self.addDistance(distanceToHUB)
+        self.addTime(self.distanceObj.calculateTimeGivenDistance(distanceToHUB))
+            
+
+        return self.truckDepartureTime, self.time, self.distanceTraveled
+            
         
-    def loadPackage(self, packageID, address):
+    def loadPackage(self, packageID, address) -> None:
         self.packages.append((packageID, address))
-    def unloadPackage(self, packageID):
+    def unloadPackage(self, packageID) -> None:
         for package in self.packages:
             if package[0] == packageID:
                 self.packages.remove(package)
                 break
-    def addTime(self, minutes):
+    def addTime(self, minutes) -> None:
         self.time = self.time + timedelta(minutes=minutes)
-    def setCurrentLocation(self,address):
+    def setCurrentLocation(self,address) -> None:
         self.currentLocation = distance.Distance.returnAddressIndex(address)
         
+    def addDistance(self, distance) -> None:
+        self.distanceTraveled = self.distanceTraveled + distance    
+    
+    
+    
     def __repr__(self) -> str:
-        return f'Packages in this truck: {self.packages}'
+        return f'Packages in this truck: {self.packages} distance traveled: {self.distanceTraveled}'
     
 
     

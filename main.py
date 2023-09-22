@@ -104,17 +104,20 @@ if __name__ == "__main__":
             
     loadPackageDataAndInsertIntoHashTable()
     loadTrucks()
-    truck1.startDeliveryRoute()
-    print(truck1)
-    # print(truck2)
-    # print(truck3)
-       
     dist = distance.Distance()
     dist.loadDistanceTable()
+    print(truck1)
+    print(truck2)
+    print(truck3)
+    #truck1DeparturefromHUBTime, truck1TotalTimeTaken, truck1TotalDistanceTraveled = truck1.startDeliveryRoute()
+    #truck2DeparturefromHUBTime, truck2TotalTimeTaken, truck2TotalDistanceTraveled = truck2.startDeliveryRoute()
+    #truck3DeparturefromHUBTime, truck3TotalTimeTaken, truck3TotalDistanceTraveled = truck3.startDeliveryRoute()
+       
+
     
     #hashTable.printAll()
     
-    packageManager(datetime.today().replace(hour=10, minute=0, second=0, microsecond= 0), hashTable)
+    #packageManager(datetime.today().replace(hour=10, minute=0, second=0, microsecond= 0), hashTable)
     
     #timeTable[datetime.today().replace(hour=10, minute=0, second=0, microsecond= 0)].printAll()
     

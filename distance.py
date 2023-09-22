@@ -13,8 +13,8 @@ class Distance:
                 row_data = [float(value) if value else None for value in line[1:]]
                 self.distance_table.append([row] + row_data)
                     
-        # for entry in self.distance_table:
-        #     print(entry)
+        #for entry in self.distance_table:
+        #    print(entry)
                 
                 
             
@@ -38,10 +38,17 @@ class Distance:
     def nearestNeighbor(self, currentLocation, listOfPackages) -> tuple:
         nextPackage = None
         nextPackageDistance = float("inf")
+        #print(f"Type of distance: {type(self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) ) < nextPackageDistance)}, Type of nextPackageDistance: {type(nextPackageDistance)}")
         for package in listOfPackages:
-            if  self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) ) < nextPackageDistance:
+            distance = self.returnDistance(
+            self.returnAddressIndex(currentLocation),
+            self.returnAddressIndex(package[1])
+            )
+            print(f"Distance: {distance}, Type: {type(distance)}")
+            print(f"Type of self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) )): {self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]))}: {type(self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) ))}, Type of nextPackageDistance: {type(nextPackageDistance)}")
+            if self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) ) < nextPackageDistance:
                 nextPackage = package
                 nextPackageDistance = self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) )
-                print(f'found closer package {package[0]}, at {package[1]}, {nextPackageDistance} away')
+                #print(f'found closer package {package[0]}, at {package[1]}, {nextPackageDistance} away')
                 
         return(nextPackage, nextPackageDistance)
