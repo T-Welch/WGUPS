@@ -31,7 +31,7 @@ def loadPackageDataAndInsertIntoHashTable() -> None:
 def loadTrucks() -> None:
     truck1Packages = [30,8,27,35,40,4,37,5,29,7,39,31,1]
     truck2Packages = [6,3,14,15,34,13,16,18,19,20,21,36,38,22,12,23]
-    truck3Packages = [9,25,26,28,32,10,2,33,11,17,24]
+    truck3Packages = [9,25,28,26,32,10,2,33,11,17,24]
     for packageID in truck1Packages:
         address = hashTable.search(packageID).address
         truck1.loadPackage(packageID, address)
@@ -106,12 +106,29 @@ if __name__ == "__main__":
     loadTrucks()
     dist = distance.Distance()
     dist.loadDistanceTable()
-    print(truck1)
-    print(truck2)
-    print(truck3)
-    #truck1DeparturefromHUBTime, truck1TotalTimeTaken, truck1TotalDistanceTraveled = truck1.startDeliveryRoute()
-    #truck2DeparturefromHUBTime, truck2TotalTimeTaken, truck2TotalDistanceTraveled = truck2.startDeliveryRoute()
-    #truck3DeparturefromHUBTime, truck3TotalTimeTaken, truck3TotalDistanceTraveled = truck3.startDeliveryRoute()
+    #print(truck1)
+    #print(truck2)
+    #print(truck3)
+    truck1DeparturefromHUBTime, truck1TotalTimeTaken, truck1TotalDistanceTraveled = truck1.startDeliveryRoute()
+    print(f"\n\n\n\n Truck1 finished!!!!!\
+        Truck1 stats:\
+        Time taken: {truck1TotalTimeTaken} \
+        Distance Traveled: {truck1TotalDistanceTraveled}\
+          \n\n\n\n\n")
+    truck2DeparturefromHUBTime, truck2TotalTimeTaken, truck2TotalDistanceTraveled = truck2.startDeliveryRoute()
+    print(f"\n\n\n\n Truck2 finished!!!!!\
+        Truck1 stats:\
+        Time taken: {truck2TotalTimeTaken} \
+        Distance Traveled: {truck2TotalDistanceTraveled}\
+          \n\n\n\n\n")
+    truck3DeparturefromHUBTime, truck3TotalTimeTaken, truck3TotalDistanceTraveled = truck3.startDeliveryRoute()
+    print(f"\n\n\n\n Truck3 finished!!!!!\
+        Truck3 stats:\
+        Time taken: {truck3TotalTimeTaken} \
+        Distance Traveled: {truck3TotalDistanceTraveled}\
+          \n\n\n\n\n")
+    
+    print(f'Total distance traveled: {truck1TotalDistanceTraveled + truck2TotalDistanceTraveled + truck3TotalDistanceTraveled}')
        
 
     
