@@ -71,4 +71,23 @@ class chainingHashTable:
                 entries.append(f"{keyValue[0]}: {keyValue[1]}")
         return "{" + ", ".join(entries) + "}"
 
-        
+    # I have to add these so I an access the packages using subscript notation which is my preference because it makes the code more readable in the truck class
+    def __getitem__(self, key):
+        bucket = hash(key) % len(self.table)
+        bucket_list = self.table[bucket]
+        for keyValue in bucket_list:
+            if keyValue[0] == key:
+                return keyValue[1]
+        raise KeyError(f"{key} not found in the hash table")
+
+    def __setitem__(self, key, value):
+        self.insert(key, value)
+    
+    def __delitem__(self, key):
+        bucket = hash(key) % len(self.table)
+        bucket_list = self.table[bucket]
+        for i, keyValue in enumerate(bucket_list):
+            if keyValue[0] == key:
+                del bucket_list[i]
+                return
+        raise KeyError(f"{key} not found in the hash table")

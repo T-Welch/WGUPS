@@ -3,9 +3,9 @@ from datetime import datetime, timedelta
 class truck:
     
     
-    def __init__(self,):
+    def __init__(self):
         self.truckNumber = 0
-        self.truckDepartureTime = datetime.today().replace(hour=0, minute=0, second=0, microsecond= 0)
+        self.truckDepartureTime = datetime.today().replace(hour=0, minute=0, second=0)
         self.time = self.truckDepartureTime
         self.packages = []
         self.currentLocation = 'HUB'
@@ -13,6 +13,9 @@ class truck:
         
         self.distanceObj = distance.Distance()
         self.distanceObj.loadDistanceTable()
+        
+    def setTime(self, time):
+        self.time = time
   
     def isFull(self) -> int:
         if len(self.packages) > 16:
@@ -26,7 +29,7 @@ class truck:
             return True
         else: False
     
-    def startDeliveryRoute(self) -> tuple:            
+    def startDeliveryRoute(self, packageManager, packageHashTable) -> tuple:            
         while self.isNotEmpty():
             nextPackage, nextPackageDistance = self.distanceObj.nearestNeighbor(self.currentLocation, self.packages)
                 
@@ -36,7 +39,13 @@ class truck:
             #print(f'arrived at {nextPackage[1]}, trip took: {self.distanceObj.calculateTimeGivenDistance(nextPackageDistance)} minutes')
             self.currentLocation = nextPackage[1]
             #print(f'updating my current location to {nextPackage[1]}')
+            packageHashTable[nextPackage[0]].setDeliveryStatus('Delivered')
+            packageHashTable[nextPackage[0]].setDeliveryTime(self.time.strftime("%H:%M:%S"))
+            key = self.time.strftime("%H:%M:%S")
+            packageManager.addToTimeTable(key, packageHashTable)
+            #print(packageManager.timeTable[key])
             self.unloadPackage(nextPackage[0])
+            
             #print(f'unloading package ID: {nextPackage[0]}')
             #print(f'time is {self.time}')
             

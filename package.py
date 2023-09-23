@@ -7,8 +7,8 @@ class Package:
         zip = 0,
         deliveryDeadLine = '',
         weight = 0,
-        deliveryStatus = 0,
-        deliveryTime = 'Undelivered',):
+        deliveryStatus = 'Undelivered',
+        deliveryTime = 'N/A',):
         
         self.packageID = packageID
         self.address = address

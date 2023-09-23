@@ -6,6 +6,7 @@ import distance
 import menu
 from datetime import date, datetime, timedelta
 from truck import truck
+import packageManager
 
 hashTable = chainingHashTable.chainingHashTable()
 
@@ -83,10 +84,10 @@ while time not in hash table:
 this is because we want to get the previous status because we can not look into the future 
 '''
 
-timeTable = {}
+# timeTable = {}
 
-def packageManager(time, hashTable):
-    timeTable[time] = hashTable
+# def packageManager(time, hashTable):
+#     timeTable[time] = hashTable
 
 
 
@@ -95,33 +96,40 @@ if __name__ == "__main__":
     truck1 = truck()
     truck2 = truck()
     truck3 = truck()
-    
+    loadPackageDataAndInsertIntoHashTable()
+    loadTrucks()
+    dist = distance.Distance()
+    dist.loadDistanceTable()
+    PM = packageManager.packageManager()
+    startingTime = datetime.today().replace(hour=8, minute=0, second=0)
+    PM.initTimeTable(startingTime.time().strftime("%H:%M:%S"), hashTable)
+    #print(PM.timeTable)
 
     
     #print(calculateTimeGivenDistance(7.2))
 
     # userInterface()
             
-    loadPackageDataAndInsertIntoHashTable()
-    loadTrucks()
-    dist = distance.Distance()
-    dist.loadDistanceTable()
+
+    
+    
+    
     #print(truck1)
     #print(truck2)
     #print(truck3)
-    truck1DeparturefromHUBTime, truck1TotalTimeTaken, truck1TotalDistanceTraveled = truck1.startDeliveryRoute()
+    truck1DeparturefromHUBTime, truck1TotalTimeTaken, truck1TotalDistanceTraveled = truck1.startDeliveryRoute(PM, hashTable)
     print(f"\n\n\n\n Truck1 finished!!!!!\
         Truck1 stats:\
         Time taken: {truck1TotalTimeTaken} \
         Distance Traveled: {truck1TotalDistanceTraveled}\
           \n\n\n\n\n")
-    truck2DeparturefromHUBTime, truck2TotalTimeTaken, truck2TotalDistanceTraveled = truck2.startDeliveryRoute()
+    truck2DeparturefromHUBTime, truck2TotalTimeTaken, truck2TotalDistanceTraveled = truck2.startDeliveryRoute(PM, hashTable)
     print(f"\n\n\n\n Truck2 finished!!!!!\
         Truck1 stats:\
         Time taken: {truck2TotalTimeTaken} \
         Distance Traveled: {truck2TotalDistanceTraveled}\
           \n\n\n\n\n")
-    truck3DeparturefromHUBTime, truck3TotalTimeTaken, truck3TotalDistanceTraveled = truck3.startDeliveryRoute()
+    truck3DeparturefromHUBTime, truck3TotalTimeTaken, truck3TotalDistanceTraveled = truck3.startDeliveryRoute(PM, hashTable)
     print(f"\n\n\n\n Truck3 finished!!!!!\
         Truck3 stats:\
         Time taken: {truck3TotalTimeTaken} \
@@ -129,6 +137,8 @@ if __name__ == "__main__":
           \n\n\n\n\n")
     
     print(f'Total distance traveled: {truck1TotalDistanceTraveled + truck2TotalDistanceTraveled + truck3TotalDistanceTraveled}')
+    
+    #print(PM.timeTable[])
        
 
     
