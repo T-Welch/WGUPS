@@ -37,7 +37,7 @@ class Menu:
         print('Enter M to display this menu')
         print('Enter (S) + [time] to view the status of packages at a given time.')
         print('An example of a status lookup request is as follows:')
-        print('S 9:30')
+        print('S 9:30:10')
         
         
         

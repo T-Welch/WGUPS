@@ -91,3 +91,10 @@ class chainingHashTable:
                 del bucket_list[i]
                 return
         raise KeyError(f"{key} not found in the hash table")
+    
+    def copy(self):
+        copied_table = chainingHashTable(len(self.table))
+        for bucket in self.table:
+            for keyValue in bucket:
+                copied_table.insert(keyValue[0], keyValue[1])
+        return copied_table

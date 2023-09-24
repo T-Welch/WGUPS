@@ -16,6 +16,9 @@ class truck:
         
     def setTime(self, time):
         self.time = time
+    def setDepartureTime(self,time):
+        self.time = time
+        self.truckDepartureTime = time
   
     def isFull(self) -> int:
         if len(self.packages) > 16:
@@ -41,10 +44,13 @@ class truck:
             #print(f'updating my current location to {nextPackage[1]}')
             packageHashTable[nextPackage[0]].setDeliveryStatus('Delivered')
             packageHashTable[nextPackage[0]].setDeliveryTime(self.time.strftime("%H:%M:%S"))
-            key = self.time.strftime("%H:%M:%S")
-            packageManager.addToTimeTable(key, packageHashTable)
+            time_str = self.time.strftime("%H:%M:%S")
+            packageManager.addToTimeTable(time_str, packageHashTable.copy())
+            # key = self.time.strftime("%H:%M:%S")
+            # packageManager.addToTimeTable(key, packageHashTable)
             #print(packageManager.timeTable[key])
             self.unloadPackage(nextPackage[0])
+            print
             
             #print(f'unloading package ID: {nextPackage[0]}')
             #print(f'time is {self.time}')
@@ -53,9 +59,15 @@ class truck:
         distanceToHUB = self.distanceObj.returnDistance(self.distanceObj.returnAddressIndex(self.currentLocation),self.distanceObj.returnAddressIndex('HUB'))
         self.addDistance(distanceToHUB)
         self.addTime(self.distanceObj.calculateTimeGivenDistance(distanceToHUB))
+        
+        time_difference = self.time - self.truckDepartureTime
+        timeString = str(time_difference).split(':')
+        formattedTimeDifference = "{}:{}:{}".format(timeString[0].zfill(2), timeString[1], timeString[2][:2])
+        return self.truckDepartureTime, formattedTimeDifference, self.distanceTraveled
+
             
 
-        return self.truckDepartureTime, self.time, self.distanceTraveled
+        # return self.truckDepartureTime, timedelta(self.time - self.truckDepartureTime), self.distanceTraveled
             
         
     def loadPackage(self, packageID, address) -> None:

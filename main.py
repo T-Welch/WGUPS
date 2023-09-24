@@ -57,12 +57,13 @@ def userInterface() -> None:
             interface.optionMenu()
         if userInput.lower()[0] == 's':
             try:
-                time = datetime.strptime(userInput[2:], '%H:%M').time()
-                print(str(type(time)) + str(time))
+                # time = datetime.strptime(userInput[2:], '%H:%M').time()
+                # print(str(type(time)) + str(time))
+                PM.lookupTimeTable(userInput[2:]).printAll()
                 continue
             except ValueError:
                 print('\n**********************************************\n')
-                print('Invalid time value. Please use HH:MM ex: 09:30')
+                print('Invalid time value. Please use HH:MM:SS ex: 09:30:10')
                 print('\n**********************************************\n')
                 continue
     
@@ -97,12 +98,21 @@ if __name__ == "__main__":
     truck2 = truck()
     truck3 = truck()
     loadPackageDataAndInsertIntoHashTable()
+    hashTable.printAll()
     loadTrucks()
+    truck1.setDepartureTime(datetime.today().replace(hour=8, minute=0, second=0))
+    truck2.setDepartureTime(datetime.today().replace(hour=8, minute=0, second=0))
+    truck3.setDepartureTime(datetime.today().replace(hour=9, minute=25, second=41))
     dist = distance.Distance()
     dist.loadDistanceTable()
-    PM = packageManager.packageManager()
     startingTime = datetime.today().replace(hour=8, minute=0, second=0)
-    PM.initTimeTable(startingTime.time().strftime("%H:%M:%S"), hashTable)
+    PM = packageManager.packageManager()
+    
+    time_str = startingTime.time().strftime("%H:%M:%S")
+    PM.addToTimeTable(time_str, hashTable.copy())
+    print(PM.timeTable)
+    # startingTime = datetime.today().replace(hour=8, minute=0, second=0)
+    # PM.initTimeTable(startingTime.time().strftime("%H:%M:%S"), hashTable)
     #print(PM.timeTable)
 
     
@@ -138,7 +148,9 @@ if __name__ == "__main__":
     
     print(f'Total distance traveled: {truck1TotalDistanceTraveled + truck2TotalDistanceTraveled + truck3TotalDistanceTraveled}')
     
-    #print(PM.timeTable[])
+    # userInterface()
+    
+    
        
 
     
