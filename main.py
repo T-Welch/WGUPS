@@ -66,29 +66,6 @@ def userInterface() -> None:
                 print('Invalid time value. Please use HH:MM:SS ex: 09:30:10')
                 print('\n**********************************************\n')
                 continue
-    
-    
-    return 
-
-'''
-below we are creating a dictionary where the key is the time and the value is a copy of 
-the hash table at that given time. This way we can print the status of packages at that 
-time by just printing the value of the dictionary
-
-so when someone asks for the status at something like 9:30 we can just do something like print(packageManager[time]) something 
-we will have to look out for though is if the time requested is not in the hash table in which case we might just want to decrement by 1
-something like 
-
-while time not in hash table:
-    time = time - 1
-    
-this is because we want to get the previous status because we can not look into the future 
-'''
-
-# timeTable = {}
-
-# def packageManager(time, hashTable):
-#     timeTable[time] = hashTable
 
 
 
@@ -98,7 +75,7 @@ if __name__ == "__main__":
     truck2 = truck()
     truck3 = truck()
     loadPackageDataAndInsertIntoHashTable()
-    hashTable.printAll()
+    #hashTable.printAll()
     loadTrucks()
     truck1.setDepartureTime(datetime.today().replace(hour=8, minute=0, second=0))
     truck2.setDepartureTime(datetime.today().replace(hour=8, minute=0, second=0))
@@ -111,9 +88,9 @@ if __name__ == "__main__":
     time_str = startingTime.time().strftime("%H:%M:%S")
     PM.addToTimeTable(time_str, hashTable.copy())
     print(PM.timeTable)
-    # startingTime = datetime.today().replace(hour=8, minute=0, second=0)
+    startingTime = datetime.today().replace(hour=8, minute=0, second=0)
     # PM.initTimeTable(startingTime.time().strftime("%H:%M:%S"), hashTable)
-    #print(PM.timeTable)
+    # print(PM.timeTable)
 
     
     #print(calculateTimeGivenDistance(7.2))
@@ -145,6 +122,11 @@ if __name__ == "__main__":
         Time taken: {truck3TotalTimeTaken} \
         Distance Traveled: {truck3TotalDistanceTraveled}\
           \n\n\n\n\n")
+    
+    for key in PM.timeTable:
+        print(f'key: {key}')
+        print(PM.timeTable[key].printAll())
+        print("\n\n\n\n\n")
     
     print(f'Total distance traveled: {truck1TotalDistanceTraveled + truck2TotalDistanceTraveled + truck3TotalDistanceTraveled}')
     

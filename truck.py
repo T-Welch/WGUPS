@@ -46,11 +46,9 @@ class truck:
             packageHashTable[nextPackage[0]].setDeliveryTime(self.time.strftime("%H:%M:%S"))
             time_str = self.time.strftime("%H:%M:%S")
             packageManager.addToTimeTable(time_str, packageHashTable.copy())
-            # key = self.time.strftime("%H:%M:%S")
-            # packageManager.addToTimeTable(key, packageHashTable)
-            #print(packageManager.timeTable[key])
-            self.unloadPackage(nextPackage[0])
-            print
+            key = self.time.strftime("%H:%M:%S")
+            packageManager.addToTimeTable(key, packageHashTable)
+            self.unloadPackage(nextPackage[0]) 
             
             #print(f'unloading package ID: {nextPackage[0]}')
             #print(f'time is {self.time}')
