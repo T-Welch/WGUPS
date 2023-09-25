@@ -4,7 +4,7 @@ from package import Package
 import chainingHashTable
 import distance
 import menu
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, time
 from truck import truck
 import packageManager
 
@@ -67,8 +67,18 @@ def userInterface() -> None:
                 print('\n**********************************************\n')
                 continue
 
-
-
+def buildTableOnTheFly(hashTable, queryTime):
+    newHashTable = hashTable.copy()
+    
+    for package in newHashTable:
+            
+        if package.deliveryTime != 'N/A' and (time.fromisoformat(package.deliveryTime) > time.fromisoformat(queryTime)):
+            package.setDeliveryTime('N/A')
+            package.setDeliveryStatus('Undelivered')
+    
+        
+    newHashTable.printAll()
+    
 
 if __name__ == "__main__":    
     truck1 = truck()
@@ -85,10 +95,10 @@ if __name__ == "__main__":
     startingTime = datetime.today().replace(hour=8, minute=0, second=0)
     PM = packageManager.packageManager()
     
-    time_str = startingTime.time().strftime("%H:%M:%S")
-    PM.addToTimeTable(time_str, hashTable.copy())
-    print(PM.timeTable)
-    startingTime = datetime.today().replace(hour=8, minute=0, second=0)
+    # time_str = startingTime.time().strftime("%H:%M:%S")
+    # PM.addToTimeTable(time_str, hashTable.copy())
+    # print(PM.timeTable)
+    # startingTime = datetime.today().replace(hour=8, minute=0, second=0)
     # PM.initTimeTable(startingTime.time().strftime("%H:%M:%S"), hashTable)
     # print(PM.timeTable)
 
@@ -123,17 +133,18 @@ if __name__ == "__main__":
         Distance Traveled: {truck3TotalDistanceTraveled}\
           \n\n\n\n\n")
     
-    for key in PM.timeTable:
-        print(f'key: {key}')
-        print(PM.timeTable[key].printAll())
-        print("\n\n\n\n\n")
+    # for key in PM.timeTable:
+    #     print(f'key: {key}')
+    #     print(PM.timeTable[key].printAll())
+    #     print("\n\n\n\n\n")
+    
     
     print(f'Total distance traveled: {truck1TotalDistanceTraveled + truck2TotalDistanceTraveled + truck3TotalDistanceTraveled}')
-    
+    buildTableOnTheFly(hashTable, '09:21:09')
     # userInterface()
     
     
-       
+
 
     
     #hashTable.printAll()

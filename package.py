@@ -20,6 +20,7 @@ class Package:
         self.deliveryStatus = deliveryStatus
         self.deliveryTime = deliveryTime
         
+        
     def setPackageID(self, ID):
         self.packageID = ID
     def setAddress(self, address):

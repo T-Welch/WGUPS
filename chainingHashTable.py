@@ -78,7 +78,7 @@ class chainingHashTable:
         for keyValue in bucket_list:
             if keyValue[0] == key:
                 return keyValue[1]
-        raise KeyError(f"{key} not found in the hash table")
+        # raise KeyError(f"{key} not found in the hash table")
 
     def __setitem__(self, key, value):
         self.insert(key, value)
@@ -91,7 +91,10 @@ class chainingHashTable:
                 del bucket_list[i]
                 return
         raise KeyError(f"{key} not found in the hash table")
-    
+    def __iter__(self):
+        for bucket in self.table:
+            for item in bucket:
+                yield item[1]
     def copy(self):
         copied_table = chainingHashTable(len(self.table))
         for bucket in self.table:
