@@ -1,21 +1,7 @@
 class chainingHashTable:
     def __init__(self, initial_capacity = 10):
         
-        # Use list comprehension to create 'initial_capacity' empty lists
         self.table = [[] for _ in range(initial_capacity)]
-            
-    # def insert (self, key, item):
-    #     bucket = hash(key) % len(self.table)
-    #     bucket_list = self.table[bucket]
-        
-    #     for key in bucket_list:
-    #         if key[0] == key:
-    #             key[1] = item
-    #             return True
-    #     key_value = [key, item]
-    #     bucket_list.append(key_value)
-    #     return True
-    
     def insert(self, key, item):
         bucket = hash(key) % len(self.table)
         bucket_list = self.table[bucket]
@@ -78,7 +64,7 @@ class chainingHashTable:
         for keyValue in bucket_list:
             if keyValue[0] == key:
                 return keyValue[1]
-        # raise KeyError(f"{key} not found in the hash table")
+        raise KeyError(f"{key} not found in the hash table")
 
     def __setitem__(self, key, value):
         self.insert(key, value)

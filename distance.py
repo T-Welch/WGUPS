@@ -45,12 +45,7 @@ class Distance:
         "6351 South 900 East"]
        
        return addressList.index(address)
-        
-        # for i, line in enumerate(self.distance_table):
-        #     if line[0] == address:
-        #         return i
-        # return -1
-    
+            
     def returnDistance(self, index1, index2) -> float:
         
         bigger, smaller = (index1, index2) if index1 > index2 else (index2, index1)
@@ -64,10 +59,7 @@ class Distance:
     def nearestNeighbor(self, currentLocation, listOfPackages) -> tuple:
         nextPackage = None
         nextPackageDistance = float("inf")
-        #print(f"Type of distance: {type(self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) ) < nextPackageDistance)}, Type of nextPackageDistance: {type(nextPackageDistance)}")
         for package in listOfPackages:
-            # print(package)
-            # print(f"Type of self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) )): {self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]))}: {type(self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) ))}, Type of nextPackageDistance: {type(nextPackageDistance)}")
             if self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) ) < nextPackageDistance:
                 nextPackage = package
                 nextPackageDistance = self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) )

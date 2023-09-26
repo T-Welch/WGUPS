@@ -5,7 +5,7 @@ class truck:
     
     def __init__(self):
         self.truckNumber = 0
-        self.truckDepartureTime = datetime.today().replace(hour=0, minute=0, second=0)
+        self.truckDepartureTime = datetime.today().replace(hour=0, minute=0, second=0).time
         self.time = self.truckDepartureTime
         self.packages = []
         self.currentLocation = 'HUB'
@@ -39,9 +39,7 @@ class truck:
                 
             self.addTime(self.distanceObj.calculateTimeGivenDistance(nextPackageDistance))
             self.addDistance(nextPackageDistance)
-            #print(f'arrived at {nextPackage[1]}, trip took: {self.distanceObj.calculateTimeGivenDistance(nextPackageDistance)} minutes')
             self.currentLocation = nextPackage[1]
-            #print(f'updating my current location to {nextPackage[1]}')
             packageHashTable[nextPackage[0]].setDeliveryStatus('Delivered')
             packageHashTable[nextPackage[0]].setDeliveryTime(self.time.strftime("%H:%M:%S"))
             time_str = self.time.strftime("%H:%M:%S")
@@ -49,10 +47,7 @@ class truck:
             key = self.time.strftime("%H:%M:%S")
             packageManager.addToTimeTable(key, packageHashTable)
             self.unloadPackage(nextPackage[0]) 
-            
-            #print(f'unloading package ID: {nextPackage[0]}')
-            #print(f'time is {self.time}')
-            
+                        
         print(f'All packages delivered, returning to HUB')
         distanceToHUB = self.distanceObj.returnDistance(self.distanceObj.returnAddressIndex(self.currentLocation),self.distanceObj.returnAddressIndex('HUB'))
         self.addDistance(distanceToHUB)
