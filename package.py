@@ -1,3 +1,4 @@
+#This is the package class. it's incredibly basic and is really just for creating the object and creating functions that modify the variables 
 class Package:
     def __init__ (self,
         packageID = 0,
@@ -7,7 +8,7 @@ class Package:
         zip = 0,
         deliveryDeadLine = '',
         weight = 0,
-        deliveryStatus = 'Undelivered',
+        deliveryStatus = 'at hub',
         deliveryTime = 'N/A',):
         enRouteTime = ''
         
@@ -50,8 +51,10 @@ class Package:
         self.enRouteTime = time
     def setTruckDepartureTime(self, time):
         self.truckDepartureTime = time
+        
+        #These f strings are created for formatting so the table looks neat when it is printed to the screen 
     def returnStringRepresentation(self):
-        return f"{'Package ID: ' + str(self.packageID):<15} | {'Address: '+ self.address:<25} | {'City: ' + self.city:<25} | {'State: ' + self.state:<10} | {'Zip: ' + self.zip:<10} | {'Delivery Deadline: ' + self.deliveryDeadLine:<28} | {'Weight: ' + str(self.weight):<10} | {'Delivery Status: ' + str(self.deliveryStatus):<25} | {'Delivery Time: ' + self.deliveryTime:<12} | {'enRouteTime: ' + str(self.enRouteTime):<12}"
+        return f"{'Package ID: ' + str(self.packageID):<15} | {'Address: '+ self.address:<48} | {'City: ' + self.city:<25} | {'State: ' + self.state:<10} | {'Zip: ' + self.zip:<10} | {'Delivery Deadline: ' + self.deliveryDeadLine:<28} | {'Weight: ' + str(self.weight):<10} | {'Delivery Status: ' + str(self.deliveryStatus):<25} | {'Delivery Time: ' + self.deliveryTime:<12} | {'enRouteTime: ' + str(self.enRouteTime):<12}"
     
     def __repr__(self):
-        return f"{'Package ID: ' + str(self.packageID):<15} | {'Address: '+ self.address:<25} | {'City: ' + self.city:<25} | {'State: ' + self.state:<10} | {'Zip: ' + self.zip:<10} | {'Delivery Deadline: ' + self.deliveryDeadLine:<28} | {'Weight: ' + str(self.weight):<10} | {'Delivery Status: ' + str(self.deliveryStatus):<25} | {'Delivery Time: ' + self.deliveryTime:<12}"
+        return f"{'Package ID: ' + str(self.packageID):<15} | {'Address: '+ self.address:<48} | {'City: ' + self.city:<25} | {'State: ' + self.state:<10} | {'Zip: ' + self.zip:<10} | {'Delivery Status: ' + str(self.deliveryStatus):<25} | {'Delivery Time: ' + self.deliveryTime:<12} | {'Delivery Deadline: ' + self.deliveryDeadLine:<28} | {'enRouteTime: ' + str(self.enRouteTime):<12} | {'Weight: ' + str(self.weight):<10}"

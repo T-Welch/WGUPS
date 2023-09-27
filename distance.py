@@ -4,7 +4,8 @@ class Distance:
         
         self.distance_table = []
     
-    
+    #this is how we load the distane csv, this then populates a list (array) of lists (arrays)
+    #from this list we can calculate distances between destinations
     def loadDistanceTable(self):
         with open('distance_table.csv', newline = '') as DTCSV:
             DT = csv.reader(DTCSV, delimiter=',')
@@ -14,7 +15,9 @@ class Distance:
                 self.distance_table.append([row] + row_data)
                 
             
-    
+    #this is a function to take in a string (address)
+    #and return which index location that address is at in the array 
+    #allowing for better readability in other functions
     def returnAddressIndex(self, address) -> int:
        addressList = ["HUB",
         "1060 Dalton Ave S",
@@ -46,15 +49,21 @@ class Distance:
        
        return addressList.index(address)
             
+        #this takes in two locations and returns the distance. we need to figure out which is bigger because that will
+        #dictate which one we use as the first index because it will have more complete information on the distance table
     def returnDistance(self, index1, index2) -> float:
         
         bigger, smaller = (index1, index2) if index1 > index2 else (index2, index1)
         
         return self.distance_table[bigger][smaller + 1]
+    #this returns the time it takes to travel a certain distance since our speed is a constant 
     def calculateTimeGivenDistance(self,distance) -> float:
     
         fractional_time = distance/18
         return(60 * fractional_time)
+    
+    #this is the nearest neighbor algo. it is a greedy algo which takes a current location and a list of locations
+    #it then checks which address is closest and returns that package and the distance to that address
     
     def nearestNeighbor(self, currentLocation, listOfPackages) -> tuple:
         nextPackage = None
@@ -63,6 +72,4 @@ class Distance:
             if self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) ) < nextPackageDistance:
                 nextPackage = package
                 nextPackageDistance = self.returnDistance(self.returnAddressIndex(currentLocation),self.returnAddressIndex(package[1]) )
-                #print(f'found closer package {package[0]}, at {package[1]}, {nextPackageDistance} away')
-                
         return(nextPackage, nextPackageDistance)

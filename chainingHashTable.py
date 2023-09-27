@@ -6,7 +6,7 @@ class chainingHashTable:
         bucket = hash(key) % len(self.table)
         bucket_list = self.table[bucket]
 
-        for entry in bucket_list:   # Changed 'key' to 'entry' to prevent conflict
+        for entry in bucket_list:
             if entry[0] == key:
                 entry[1] = item
                 return True
@@ -31,7 +31,7 @@ class chainingHashTable:
         for keyValue in bucket_list:
             if keyValue[0] == key:
                 bucket_list.remove([keyValue[0],keyValue[1]])
-                
+    #this is for printing all of the values in the hashTable in order of their key to make the table readable
     def printAll(self):
         # Create a list to store (original key, value) pairs
         sorted_entries = []
@@ -77,10 +77,13 @@ class chainingHashTable:
                 del bucket_list[i]
                 return
         raise KeyError(f"{key} not found in the hash table")
+    #this was another cool thing I learned to make the hashTable iterable
     def __iter__(self):
         for bucket in self.table:
             for item in bucket:
                 yield item[1]
+    #this is used to create a copy of the table that can be modified without modifying the original 
+    #for use when displaying that "on the fly" status table
     def copy(self):
         copied_table = chainingHashTable(len(self.table))
         for bucket in self.table:

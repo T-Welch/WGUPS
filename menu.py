@@ -1,4 +1,9 @@
 import random
+
+#this is for printing the menu in the user interface, I had a bunch of messages of the day loaded and 
+#would call a random one for inspiration and to give it a unique kind of feel but it was corny
+#and unnecessary for the program to function so i removed it. i will add it back in if/when I add 
+#this program to my portfolio though 
 class Menu:    
     def welcomeMessage() -> None:
         print('**********************************************************************************\n')
